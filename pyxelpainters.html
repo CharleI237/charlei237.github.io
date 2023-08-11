@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pixel Canvas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .canvas {
+            display: grid;
+            grid-template-columns: repeat(50, 20px);
+            gap: 1px;
+            background-color: #ddd;
+            padding: 10px;
+        }
+
+        .pixel {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            transition: background-color 0.2s;
+        }
+
+        .pixel:hover {
+            background-color: #999;
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .color {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pixel Canvas</h1>
+        <p>Click on a color and then on a pixel to paint.</p>
+    </header>
+    <div class="canvas" id="canvas">
+    </div>
+    <div class="color-palette" id="color-palette">
+    </div>
+    <footer>
+        <p>&copy; 2023 Pixel Canvas</p>
+    </footer>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const colorPalette = document.getElementById("color-palette");
+
+        const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"];
+        let selectedColor = colors[0];
+
+        colors.forEach(color => {
+            const colorDiv = document.createElement("div");
+            colorDiv.classList.add("color");
+            colorDiv.style.backgroundColor = color;
+
+            colorDiv.addEventListener("click", () => {
+                selectedColor = color;
+            });
+
+            colorPalette.appendChild(colorDiv);
+        });
+
+        for (let i = 0; i < 50 * 50; i++) {
+            const pixel = document.createElement("div");
+            pixel.classList.add("pixel");
+
+            pixel.addEventListener("click", () => {
+                pixel.style.backgroundColor = selectedColor;
+            });
+
+            canvas.appendChild(pixel);
+        }
+    </script>
+</body>
+</html>
